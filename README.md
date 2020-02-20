@@ -37,3 +37,5 @@ rosrun teensy_ros reading_ultrasonic_sensors.py
 * Create some documentation on the pinouts of the stripboard
 
 * Add the CNC shield 
+
+* Convert the teensy code to a more object oriented style using classes and such
