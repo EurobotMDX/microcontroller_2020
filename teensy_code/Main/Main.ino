@@ -6,7 +6,6 @@
 uint16_t sensors[2];
 
 void setup() {
-
   //  nh.getHardware()->setBaud(115200);
   nh.initNode();
   init_servo_board();

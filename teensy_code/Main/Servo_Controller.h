@@ -17,9 +17,11 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 #define USMAX  2400 // This is the rounded 'maximum' microsecond length based on the maximum pulse of 600
 #define SERVO_FREQ 50 // Analog servos run at ~50 Hz updates
 
-#define NUMBER_OF_SERVOS 2 //Number of servos
-const uint16_t min_servo_value[NUMBER_OF_SERVOS] = {80,80};
-const uint16_t max_servo_value[NUMBER_OF_SERVOS] = {540, 540};
+#define NUMBER_OF_SERVOS 16 //Number of servos
+const uint16_t min_servo_value[NUMBER_OF_SERVOS] = {80,80,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+const uint16_t max_servo_value[NUMBER_OF_SERVOS] = {540,540,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
+uint16_t servo_angles[16] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 void init_servo_board(){
   
@@ -50,6 +52,18 @@ void open_all_servos(){
 void close_all_servos(){
   for(int i=0; i<NUMBER_OF_SERVOS;i++){
     pwm.setPWM(i,0,min_servo_value[i]);
+  }
+}
+
+uint8_t get_pulse_from_angle(uint16_t servo_min, uint16_t servo_max, uint8_t desired_angle){
+  return map(desired_angle,0,180,servo_min,servo_max);
+}
+
+void set_servo_angles(){
+  for(int i=0; i<16; i++){
+    uint8_t pulse = get_pulse_from_angle(min_servo_value[i],max_servo_value[i], servo_angles[i]);
+    pwm.setPWM(i, 0, pulse);
+
   }
 }
 

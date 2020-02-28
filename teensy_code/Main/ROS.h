@@ -4,6 +4,8 @@
 #include <Arduino.h>
 #include <ros.h>
 #include <std_msgs/UInt16MultiArray.h>
+#include "std_msgs/MultiArrayLayout.h"
+#include "std_msgs/MultiArrayDimension.h"
 #include <std_msgs/String.h>
 #include <WProgram.h>
 #include "Ultrasonic.h"
@@ -12,22 +14,22 @@
 ros::NodeHandle nh;
 std_msgs::UInt16MultiArray sensor_msg;
 
-void servo_callback( const std_msgs::String& command)
+
+
+void servo_callback( const std_msgs::UInt16MultiArray& command)
 {
-
-  if (command.data[0] == 'o')
-  {
-    nh.loginfo("Servos Opened");
+  char error_buffer [1000];
+  for (int i = 0; i < 16; i++) {
+    servo_angles[i] = command.data[i];
+    //lines below print servo angles to the terminal
+    sprintf(error_buffer, "Angles Servo1:%d Servo2:%d Servo3:%d Servo4:%d Servo5:%d Servo6:%d Servo7:%d Servo8:%d Servo9:%d Servo10:%d Servo11:%d Servo12:%d Servo13:%d Servo14:%d Servo15:%d Servo16:%d", command.data[0], command.data[1], command.data[2], command.data[3], command.data[4], command.data[5], command.data[6], command.data[7], command.data[8], command.data[9], command.data[10], command.data[11], command.data[12], command.data[13], command.data[14], command.data[15]);
+    nh.loginfo(error_buffer);
   }
-    if (command.data[0] == 'c')
-  {
-    nh.loginfo("Servos Closed");
-  }
-
+  set_servo_angles();
 }
 
 ros::Publisher ultrasonic_sensors("ultrasonic_sensors", &sensor_msg);
-ros::Subscriber<std_msgs::String> servo_controller("open_close_servo", servo_callback);
+ros::Subscriber<std_msgs::UInt16MultiArray> servo_controller("open_close_servo", servo_callback);
 
 
 
