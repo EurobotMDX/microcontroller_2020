@@ -1,0 +1,5 @@
+# 
+
+After uploading the teensy code and plugging into computer or odroid the rosserial node is ran by using the command 
+	rosrun rosserial_arduino serial_node.py _port:=/dev/ttyACM0
+
