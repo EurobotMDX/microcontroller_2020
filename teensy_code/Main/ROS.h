@@ -22,10 +22,10 @@ void servo_callback( const std_msgs::UInt16MultiArray& command)
   for (int i = 0; i < 16; i++) {
     servo_angles[i] = command.data[i];
     //lines below print servo angles to the terminal
-    sprintf(error_buffer, "Angles Servo1:%d Servo2:%d Servo3:%d Servo4:%d Servo5:%d Servo6:%d Servo7:%d Servo8:%d Servo9:%d Servo10:%d Servo11:%d Servo12:%d Servo13:%d Servo14:%d Servo15:%d Servo16:%d", command.data[0], command.data[1], command.data[2], command.data[3], command.data[4], command.data[5], command.data[6], command.data[7], command.data[8], command.data[9], command.data[10], command.data[11], command.data[12], command.data[13], command.data[14], command.data[15]);
+    sprintf(error_buffer, "Angles Servo1:%d Servo2:%d Servo3:%d Servo4:%d Servo5:%d Servo6:%d Servo7:%d Servo8:%d Servo9:%d Servo10:%d Servo11:%d Servo12:%d Servo13:%d Servo14:%d Servo15:%d Servo16:%d", servo_angles[0], servo_angles[1], servo_angles[2], servo_angles[3], servo_angles[4], servo_angles[5], servo_angles[6], servo_angles[7], servo_angles[8], servo_angles[9], servo_angles[10], servo_angles[11], servo_angles[12], servo_angles[13], servo_angles[14], servo_angles[15]);
     nh.loginfo(error_buffer);
   }
-  set_servo_angles();
+    set_servo_angles();
 }
 
 ros::Publisher ultrasonic_sensors("ultrasonic_sensors", &sensor_msg);

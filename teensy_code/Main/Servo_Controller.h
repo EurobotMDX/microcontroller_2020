@@ -55,15 +55,14 @@ void close_all_servos(){
   }
 }
 
-uint8_t get_pulse_from_angle(uint16_t servo_min, uint16_t servo_max, uint8_t desired_angle){
+uint16_t get_pulse_from_angle(uint16_t servo_min, uint16_t servo_max, uint8_t desired_angle){
   return map(desired_angle,0,180,servo_min,servo_max);
 }
 
 void set_servo_angles(){
   for(int i=0; i<16; i++){
-    uint8_t pulse = get_pulse_from_angle(min_servo_value[i],max_servo_value[i], servo_angles[i]);
+    uint16_t pulse = get_pulse_from_angle(min_servo_value[i],max_servo_value[i], servo_angles[i]);
     pwm.setPWM(i, 0, pulse);
-
   }
 }
 
