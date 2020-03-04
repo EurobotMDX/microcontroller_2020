@@ -14,28 +14,57 @@ The first step is to upload the code to the teensy. The files can be found in th
 rosrun rosserial_arduino serial_node.py _port:=/dev/ttyACM0
 ```
 
-Then you can either listen to the topic using rostopic with the following command
+Next if you want to control the servo with rostopic pub you can use the command 
 
 ```
-rosrun rosserial_arduino serial_node.py _port:=/dev/ttyACM0
+rostopic pub /open_close_servo std_msgs/UInt16MultiArray "layout:
+  dim:
+  - label: ''
+    size: 16
+    stride: 0
+  data_offset: 0
+data:
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0"
 ```
 
-Or you can run the python interpreter that prints out the values using the command 
+Or you can run the python code using the command
 
 ```
-rosrun teensy_ros reading_ultrasonic_sensors.py 
+rosrun teensy_ros controlling_servos.py
 ```
+
+# Possible Issues
+
+* If you are trying to run the command rostopic above and the terminal keeps inputting each line seperately with > on each line then you must first type ctrl + x then ctrl + e when nano opens up you can paste the command there then type ctrl x to save and run it.
+
+* Don't ever Serial print with the teensy it makes it so that you can never run rosserial_arduino until you restart computer.
+
+* If you get the error 'could not open port' when running the rosserial command then you must run the command sudo chmod 666 /dev/ttyACM0 (If this is not the port of the teensy you can find it by going to cd /dev and ls. The Teensy will be ttyACMx
+
+* Don't upload arduino code while the rosserial node is running. It will make it so that your teensy port is no longer at ttyACM0 but ttyACM1 and every time you run rosserial the tty increments by 1
 
 # To do list
 
-* Plot the data coming from the ultrasonic sensors using some python library
-
-* Add teensy and ros code that will be able to control the servos with python
+* ~~Add teensy and ros code that will be able to control the servos with python~~ (Completed)
 
 * Create a launch file 
 
-* Create some documentation on the pinouts of the stripboard
+* Create some documentation of PCB
 
-* Add the CNC shield 
+* Add the CNC shield code
 
-* Convert the teensy code to a more object oriented style using classes and such

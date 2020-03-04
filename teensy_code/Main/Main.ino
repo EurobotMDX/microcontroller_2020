@@ -19,5 +19,4 @@ void loop() {
   read_sensors(sensors);
   publish_sensor_msg();
   nh.spinOnce();
-
 }

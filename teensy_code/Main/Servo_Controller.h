@@ -18,8 +18,8 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 #define SERVO_FREQ 50 // Analog servos run at ~50 Hz updates
 
 #define NUMBER_OF_SERVOS 16 //Number of servos
-const uint16_t min_servo_value[NUMBER_OF_SERVOS] = {80,80,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-const uint16_t max_servo_value[NUMBER_OF_SERVOS] = {540,540,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+const uint16_t min_servo_value[NUMBER_OF_SERVOS] = {80,80,80,80,80,80,80,80,80,80,80,80,80,80,80,80};
+const uint16_t max_servo_value[NUMBER_OF_SERVOS] = {540,540,540,540,540,540,540,540,540,540,540,540,540,540,540,540};
 
 uint16_t servo_angles[16] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
